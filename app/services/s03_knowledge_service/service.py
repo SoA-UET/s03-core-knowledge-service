@@ -124,7 +124,6 @@ class KnowledgeService:
         """Stop the Knowledge Service and cleanup resources."""
         print("[S03 KnowledgeService] Stopping service...")
         self.db.close()
-        print("[S03 KnowledgeService] Stopped")
 
 
 def main():
@@ -135,7 +134,7 @@ def main():
     from dotenv import load_dotenv
     load_dotenv()
     
-    # Create and start service
+    # # Create and start service
     service = KnowledgeService()
     
     try:
@@ -147,6 +146,8 @@ def main():
         print(f"[S03 KnowledgeService] Fatal error: {e}")
         service.stop()
         raise
+
+    MessageQueueService().start_consuming()
 
 
 if __name__ == "__main__":

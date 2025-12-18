@@ -29,7 +29,7 @@ class A08Consumer:
             seaweed_master_url: SeaweedFS master URL (default from env)
             on_knowledge_stored: Callback(partner_id, knowledge_data) after storing
         """
-        self.mq_service = mq_service.clone()
+        self.mq_service = mq_service
         self.seaweed_master_url = seaweed_master_url or os.getenv(
             "SEAWEED_MASTER_URL",
             "http://localhost:9333"
