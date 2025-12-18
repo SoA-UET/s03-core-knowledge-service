@@ -11,6 +11,7 @@ from pymongo.database import Database
 from pymongo.collection import Collection
 from datetime import datetime
 import traceback
+from ...utils.db import serialize_mongo_doc
 
 class MongoKnowledgeDB:
     """MongoDB database handler for knowledge storage."""
@@ -63,6 +64,8 @@ class MongoKnowledgeDB:
             # Add partner_id and timestamp
             package["partner_id"] = partner_id
             package["updated_at"] = datetime.utcnow()
+
+            package = serialize_mongo_doc(package)
             
             # Upsert based on partner_id and service code
             result = self.packages.update_one(
@@ -108,6 +111,9 @@ class MongoKnowledgeDB:
                     "answer": faq.get("answer", ""),
                     "created_at": datetime.utcnow()
                 }
+
+                faq_doc = serialize_mongo_doc(faq_doc)
+                
                 faqs_to_insert.append(faq_doc)
             
             insert_result = self.faqs.insert_many(faqs_to_insert)
