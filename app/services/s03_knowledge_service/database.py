@@ -10,7 +10,7 @@ from pymongo import MongoClient
 from pymongo.database import Database
 from pymongo.collection import Collection
 from datetime import datetime
-
+import traceback
 
 class MongoKnowledgeDB:
     """MongoDB database handler for knowledge storage."""
@@ -165,4 +165,6 @@ class MongoKnowledgeDB:
     
     def close(self):
         """Close MongoDB connection."""
+        print("MONGODB CLOSE CALLED FROM:")
+        traceback.print_stack()
         self.client.close()
