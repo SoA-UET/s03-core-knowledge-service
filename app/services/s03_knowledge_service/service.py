@@ -76,6 +76,11 @@ class KnowledgeService:
             # Extract packages and faqs from knowledge data
             packages = knowledge_data.get("packages", [])
             faqs = knowledge_data.get("faqs", [])
+
+            # Debug: Check MongoDB connection status
+            client = self.db.client
+            print(f"MONGODB_CLOSED =", client, client._topology._closed)
+            del client
             
             # Store in MongoDB
             if packages:
@@ -109,7 +114,7 @@ class KnowledgeService:
         print("[S03 KnowledgeService] Starting service...")
         
         # Start A08 consumer
-        self.a08_consumer.start_consuming()
+        self.a08_consumer.register_callbacks()
         
         # Start consuming (blocking)
         print("[S03 KnowledgeService] Listening for A08 events...")

@@ -42,7 +42,7 @@ class A08Consumer:
         # Declare queue
         self.mq_service.declare_queue(self.event_queue)
         
-    def start_consuming(self):
+    def register_callbacks(self):
         """Start consuming A08 events."""
         print(f"[A08Consumer] Registering callback on queue: {self.event_queue}")
         self.mq_service.register_callback(self.event_queue, self._handle_event)
