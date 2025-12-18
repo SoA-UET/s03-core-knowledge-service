@@ -64,7 +64,7 @@ class A01Client:
             with self.response_lock:
                 self.responses[request_id] = message
     
-    def _wait_for_response(self, request_id: str, timeout: float = 30.0) -> Dict[str, Any]:
+    def _wait_for_response(self, request_id: str, timeout: float = 600.0) -> Dict[str, Any]:
         """Wait for RPC response."""
         import time
         start_time = time.time()
